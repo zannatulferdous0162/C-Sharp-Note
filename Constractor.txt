@@ -1,0 +1,145 @@
+C# কন্সট্রাক্টর কি?
+কন্সট্রাক্টর হল একটি বিশেষ ধরনের মেথড যা কোন ক্লাস বা স্ট্রাক্ট অবজেক্ট তৈরি করার সময় স্বয়ংক্রিয়ভাবে কল হয়। এটি সাধারণত অবজেক্টের প্রাথমিক মান সেটআপ করতে ব্যবহৃত হয়।
+
+কন্সট্রাক্টরের বৈশিষ্ট্য
+নাম: কন্সট্রাক্টরের নামটি ক্লাসের নামের মতোই হয়।
+
+রিটার্ন টাইপ নেই: কন্সট্রাক্টরের কোনো রিটার্ন টাইপ থাকে না, এমনকি void ও নয়।
+
+স্বয়ংক্রিয় কল: অবজেক্ট তৈরি করার সময় এটি স্বয়ংক্রিয়ভাবে কল হয়।
+
+কন্সট্রাক্টরের প্রকারভেদ
+1. ডিফল্ট কন্সট্রাক্টর
+যখন আপনি কোনো কন্সট্রাক্টর ডিফাইন না করেন, C# নিজে একটি ডিফল্ট কন্সট্রাক্টর সরবরাহ করে।
+
+এটি কোনো প্যারামিটার নেয় না এবং সব ফিল্ডকে ডিফল্ট মান সেট করে।
+
+csharp
+class Example
+{
+    int value;
+    public Example() // Default Constructor
+    {
+        value = 0;
+    }
+}
+2. প্যারামিটারাইজড কন্সট্রাক্টর
+এটি প্যারামিটার গ্রহণ করে এবং আপনার পছন্দমত ফিল্ড ইনিশিয়ালাইজ করতে ব্যবহৃত হয়।
+
+csharp
+class Example
+{
+    int value;
+    public Example(int x) // Parameterized Constructor
+    {
+        value = x;
+    }
+}
+3. স্ট্যাটিক কন্সট্রাক্টর
+এটি স্ট্যাটিক মেম্বার ইনিশিয়ালাইজ করতে ব্যবহৃত হয়।
+
+স্ট্যাটিক কন্সট্রাক্টর কখনো প্যারামিটার গ্রহণ করে না।
+
+এটি কেবলমাত্র একবারই কল হয়, যখন ক্লাস প্রথমবার ব্যবহৃত হয়।
+
+csharp
+class Example
+{
+    static int staticValue;
+
+    static Example() // Static Constructor
+    {
+        staticValue = 10;
+    }
+}
+4. কপি কন্সট্রাক্টর (Copy Constructor)
+এটি আরেকটি অবজেক্ট থেকে মান কপি করতে ব্যবহৃত হয়।
+
+csharp
+class Example
+{
+    int value;
+
+    public Example(int x)
+    {
+        value = x;
+    }
+
+    public Example(Example obj) // Copy Constructor
+    {
+        value = obj.value;
+    }
+}
+5. প্রাইভেট কন্সট্রাক্টর
+এটি সাধারণত সিঙ্গলটন ডিজাইন প্যাটার্নে ব্যবহৃত হয় যেখানে ক্লাসের একাধিক ইনস্ট্যান্স তৈরি করতে দেয়া হয় না।
+
+csharp
+class Example
+{
+    private Example() // Private Constructor
+    {
+    }
+}
+কন্সট্রাক্টর ওভারলোডিং
+একই ক্লাসে একাধিক কন্সট্রাক্টর ডিফাইন করা সম্ভব, যদি তাদের প্যারামিটারের সংখ্যা বা ধরন ভিন্ন হয়। এটিকে কন্সট্রাক্টর ওভারলোডিং বলা হয়।
+
+csharp
+class Example
+{
+    int value;
+
+    public Example() // Default Constructor
+    {
+        value = 0;
+    }
+
+    public Example(int x) // Parameterized Constructor
+    {
+        value = x;
+    }
+
+    public Example(int x, int y) // Overloaded Constructor
+    {
+        value = x + y;
+    }
+}
+বেস কন্সট্রাক্টর কল (Base Constructor Call)
+ইনহেরিটেন্স ব্যবহারের সময়, ডেরাইভড ক্লাসের কন্সট্রাক্টর থেকে বেস ক্লাসের কন্সট্রাক্টর কল করতে base কীওয়ার্ড ব্যবহার করা হয়।
+
+csharp
+class BaseClass
+{
+    public BaseClass()
+    {
+        Console.WriteLine("Base Constructor Called");
+    }
+}
+
+class DerivedClass : BaseClass
+{
+    public DerivedClass() : base() // Base Constructor Call
+    {
+        Console.WriteLine("Derived Constructor Called");
+    }
+}
+কন্সট্রাক্টর চেইনিং
+একই ক্লাসের এক কন্সট্রাক্টর থেকে অন্য কন্সট্রাক্টর কল করতে this কীওয়ার্ড ব্যবহার করা হয়।
+
+csharp
+class Example
+{
+    int value;
+
+    public Example() : this(100) // Constructor Chaining
+    {
+    }
+
+    public Example(int x)
+    {
+        value = x;
+    }
+}
+গুরুত্বপূর্ণ বিষয়
+কন্সট্রাক্টর অ্যাক্সেস মডিফায়ার: কন্সট্রাক্টর সাধারণত public হয়, তবে private, protected, এমনকি internal কন্সট্রাক্টরও তৈরি করা যায়।
+
+ডেস্ট্রাক্টর: অবজেক্ট ডেস্ট্রয় করার আগে ব্যবহৃত হয়। এটি ~ClassName ফর্ম্যাটে লেখা হয়। তবে, C# এ গারবেজ কালেকশন থাকায় ডেস্ট্রাক্টর খুব কম ব্যবহৃত হয়।
