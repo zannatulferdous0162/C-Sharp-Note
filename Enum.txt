@@ -1,0 +1,179 @@
+enum কী?
+enum (Enumeration) একটি বিল্ট-ইন টাইপ যা একটি সেট বা গ্রুপের মধ্যে নামকৃত ধ্রুবক মান (constants) সংরক্ষণ করতে ব্যবহৃত হয়। এটি প্রোগ্রামের কোডকে আরো পাঠযোগ্য এবং বোধগম্য করে।
+
+মূল উদ্দেশ্য:
+
+একটি নির্দিষ্ট মানের সেট তৈরির জন্য enum ব্যবহার করা হয়।
+
+এটি ইনটিজার টাইপের মানগুলিকে নামকৃত ভ্যালুতে পরিবর্তন করে, যা কোড পড়া এবং বুঝতে সহজ করে।
+
+enum ডিক্লারেশন (ঘোষণা):
+csharp
+enum Designation
+{
+    Director = 1,
+    AssistantDirector,
+    GeneralManager,
+    AssistantManager,
+    Accountant
+}
+ব্যাখ্যা:
+
+enum কীওয়ার্ড ব্যবহার করে Designation নামের একটি ইন্যুমারেশন ঘোষণা করা হয়েছে।
+
+ডিফল্টভাবে প্রথম মানের সংখ্যা 0 হয়, কিন্তু এখানে Director এর মান 1 সেট করা হয়েছে।
+
+পরবর্তী আইটেমগুলো স্বয়ংক্রিয়ভাবে বৃদ্ধি পায়, যেমন:
+
+AssistantDirector = 2
+
+GeneralManager = 3
+
+enum ব্যবহার:
+enum ব্যবহার করা যায় প্রোগ্রামের মধ্যে:
+
+ধরন (Type) হিসাবে
+
+মান সংরক্ষণের জন্য
+
+শর্তমূলক লজিক (switch-case) লেখার সময়
+
+উদাহরণ ১: Enum এর মান অ্যাক্সেস করা
+csharp
+class Program
+{
+    static void Main(string[] args)
+    {
+        Designation empDesignation = Designation.GeneralManager;
+        Console.WriteLine(empDesignation);  // Output: GeneralManager
+        Console.WriteLine((int)empDesignation);  // Output: 3
+    }
+}
+ব্যাখ্যা:
+
+Designation.GeneralManager মানটি নির্দিষ্ট করা হয়েছে।
+
+(int) দ্বারা ইন্টিজার ভ্যালু প্রিন্ট করা হয়েছে।
+
+enum এর বৈশিষ্ট্যসমূহ:
+ডিফল্ট ভ্যালু:
+
+ডিফল্টভাবে একটি enum এর প্রথম মান 0 দিয়ে শুরু হয়।
+
+তবে প্রয়োজন অনুযায়ী প্রথম মান নির্দিষ্ট করা যায়।
+
+csharp
+enum WeekDays { Sunday, Monday, Tuesday }
+// Sunday = 0, Monday = 1, Tuesday = 2
+কাস্টম স্টার্টিং ভ্যালু:
+
+নির্দিষ্ট স্টার্টিং ভ্যালু সেট করা সম্ভব।
+
+csharp
+enum WeekDays { Sunday = 1, Monday, Tuesday }
+// Sunday = 1, Monday = 2, Tuesday = 3
+Implicit Type Conversion:
+
+enum ভ্যালু ইন্টিজারে কনভার্ট করা যায়।
+
+csharp
+Console.WriteLine((int)WeekDays.Monday); // Output: 2
+Switch-case এর সাথে enum:
+
+switch স্টেটমেন্টে enum ব্যবহার খুবই জনপ্রিয়।
+
+csharp
+enum Days { Sunday, Monday, Tuesday };
+
+class Program
+{
+    static void Main()
+    {
+        Days today = Days.Monday;
+
+        switch (today)
+        {
+            case Days.Sunday:
+                Console.WriteLine("Today is Sunday.");
+                break;
+            case Days.Monday:
+                Console.WriteLine("Today is Monday.");
+                break;
+            default:
+                Console.WriteLine("Other day.");
+                break;
+        }
+    }
+}
+enum এর সুবিধা:
+কোডের পাঠযোগ্যতা বৃদ্ধি:
+
+সরাসরি সংখ্যা ব্যবহার না করে নামকৃত ভ্যালু ব্যবহার করা হয়।
+
+ভুল কমায়:
+
+নির্দিষ্ট মানের বাইরে কিছু ব্যবহার করলে কম্পাইল-টাইমে সমস্যা দেখায়।
+
+Switch-case সহজ হয়:
+
+বিভিন্ন কেস লজিক সহজে লেখা যায়।
+
+প্রোগ্রামের বাগ খুঁজে পাওয়া সহজ:
+
+নামকৃত ভ্যালুর কারণে কোড ডিবাগিং করা সহজ হয়।
+
+enum এর সীমাবদ্ধতা:
+শুধুমাত্র ইন্টিজার টাইপের ভ্যালু গ্রহণ করে।
+
+ফ্লোটিং পয়েন্ট বা স্ট্রিং ভ্যালু সাপোর্ট করে না।
+
+এটি class বা struct এর মতো বড় ডেটা ধারণ করতে পারে না।
+
+উন্নত ব্যবহার: Flags Attribute
+Flags অ্যাট্রিবিউট ব্যবহার করলে enum এর মানগুলো বিটওয়াইজ অপারেশন দিয়ে একসাথে ম্যানিপুলেট করা যায়।
+
+csharp
+[Flags]
+enum Permissions
+{
+    None = 0,
+    Read = 1,
+    Write = 2,
+    Execute = 4
+}
+
+class Program
+{
+    static void Main()
+    {
+        Permissions userPermissions = Permissions.Read | Permissions.Write;
+
+        Console.WriteLine(userPermissions); // Output: Read, Write
+    }
+}
+ব্যাখ্যা:
+
+Permissions.Read এবং Permissions.Write মান বিটওয়াইজ OR অপারেটরের মাধ্যমে যুক্ত হয়েছে।
+
+এটি Flags অ্যাট্রিবিউটের সাহায্যে করা হয়েছে।
+
+সংক্ষেপে:
+enum একটি নির্দিষ্ট ভ্যালুর সেট তৈরি করতে ব্যবহৃত হয়।
+
+এটি প্রোগ্রামের কোডকে পাঠযোগ্য, ঝামেলাহীন এবং স্ট্রাকচারড করে তোলে।
+
+enum এ ডিফল্ট মান 0 হলেও সেট পরিবর্তন করা যায়।
+
+switch-case এর মতো লজিক সহজে লেখা যায়।
+
+উন্নত ব্যবহার এর জন্য Flags অ্যাট্রিবিউট ব্যবহার করা হয়।
+
+প্র্যাকটিকাল অ্যাপ্লিকেশন:
+
+ডে অফ উইক (Sunday, Monday...)
+
+ডিজাইন্যাশন লেভেল (Manager, Director...)
+
+পারমিশন সিস্টেম (Read, Write, Execute...)
+
+enum ব্যবহার করলে আপনার কোড ক্লিন এবং আরো ব্যবহারযোগ্য হবে।
