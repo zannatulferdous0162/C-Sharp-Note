@@ -65,6 +65,29 @@ Console.WriteLine(matrix[1, 2]); // আউটপুট: 6
 জগড (Jagged) Array
 এটি এমন একটি অ্যারে যেখানে প্রতিটি উপাদান আরেকটি অ্যারে হতে পারে।
 
+
+Array.Sort(myArray);
+Array.Sort(): স্ট্রিং অ্যারেটিকে A to Z অর্ডারে সাজিয়ে দেয় (Alphabetical Order)।
+Array.Reverse(myArray);
+Array.Reverse(): Sort করার পর স্ট্রিং অ্যারেটিকে Z to A সাজিয়ে দেয়।
+
+
+==>মিশ্র ডেটা টাইপ (Multiple Data Type)
+
+object[] mixedArray = new object[4];
+object[]: object টাইপের অ্যারে যে কোনো ধরনের ডেটা সংরক্ষণ করতে পারে।
+new object[4]: অ্যারেটির আকার ৪ নির্ধারণ করা হয়েছে।
+
+
+mixedArray[0] = 10;
+mixedArray[1] = "Zannat";
+mixedArray[2] = true;
+mixedArray[3] = DateTime.Now;
+mixedArray[0] = 10;: প্রথম উপাদানে 10 (ইন্টিজার) রাখা হয়েছে।
+mixedArray[1] = "Zannat";: দ্বিতীয় উপাদানে "Zannat" (স্ট্রিং) রাখা হয়েছে।
+mixedArray[2] = true;: তৃতীয় উপাদানে true (বুলিয়ান) রাখা হয়েছে।
+mixedArray[3] = DateTime.Now;: চতুর্থ উপাদানে বর্তমান তারিখ ও সময় রাখা হয়েছে।
+
 csharp
 int[][] jaggedArray = new int[3][];
 jaggedArray[0] = new int[] {1, 2};
