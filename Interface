@@ -1,0 +1,127 @@
+C#-এর Interface বিস্তারিত ব্যাখ্যা
+Interface হল একটি কনট্র্যাক্ট বা চুক্তি যা কেবলমাত্র মেথড, প্রপার্টি, ইভেন্ট এবং ইনডেক্সারের ডিক্লারেশন ধারণ করে। এটি কোনো বাস্তবায়ন (implementation) সরবরাহ করে না। ক্লাস বা স্ট্রাকচারকে সেই ইন্টারফেস বাস্তবায়ন করতে হবে এবং এর সব সদস্যকে override করতে হবে।
+
+Interface-এর বৈশিষ্ট্য
+কেবল Declaration থাকে:
+
+ইন্টারফেসে কোনো মেথড, প্রপার্টি, বা ইভেন্টের জন্য শুধু সিগনেচার থাকে।
+
+বাস্তবায়নের দায়িত্ব থাকে ইন্টারফেসটি ইমপ্লিমেন্ট করা ক্লাস বা স্ট্রাকচারের।
+
+csharp
+public interface IExample
+{
+    void Display(); // Declaration only
+}
+ক্লাসের মতো নয়:
+
+ইন্টারফেসে কোনো fields বা constructors থাকে না।
+
+ইন্টারফেসের কোনো ইনস্ট্যান্স তৈরি করা যায় না।
+
+একাধিক ইন্টারফেস ইমপ্লিমেন্ট করা সম্ভব:
+
+C# একাধিক ইনহেরিটেন্স সাপোর্ট না করলেও, একাধিক ইন্টারফেস ইমপ্লিমেন্ট করা যায়।
+
+csharp
+public interface IPrintable
+{
+    void Print();
+}
+
+public interface IScannable
+{
+    void Scan();
+}
+
+public class Printer : IPrintable, IScannable
+{
+    public void Print() => Console.WriteLine("Printing...");
+    public void Scan() => Console.WriteLine("Scanning...");
+}
+Interfaces Are Public by Default:
+
+ইন্টারফেসের মেম্বার ডিফল্টভাবে public হয়। একে আলাদাভাবে public উল্লেখ করার প্রয়োজন নেই।
+
+কেন ইন্টারফেস ব্যবহার করবেন?
+Loose Coupling: ইন্টারফেসের মাধ্যমে কোডের মডিউলগুলো একে অপরের ওপর কম নির্ভরশীল থাকে।
+
+Code Reusability: বিভিন্ন ক্লাসে একই ইন্টারফেস ইমপ্লিমেন্ট করে কোডের পুনঃব্যবহার নিশ্চিত করা যায়।
+
+Polymorphism: ইন্টারফেসের মাধ্যমে runtime polymorphism সহজে অর্জন করা যায়।
+
+একটি উদাহরণ
+csharp
+using System;
+
+public interface IAnimal
+{
+    void Speak();
+}
+
+public class Dog : IAnimal
+{
+    public void Speak()
+    {
+        Console.WriteLine("Bark!");
+    }
+}
+
+public class Cat : IAnimal
+{
+    public void Speak()
+    {
+        Console.WriteLine("Meow!");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        IAnimal dog = new Dog();
+        IAnimal cat = new Cat();
+
+        dog.Speak(); // Output: Bark!
+        cat.Speak(); // Output: Meow!
+    }
+}
+Interface এবং Abstract Class-এর পার্থক্য
+Feature	Interface	Abstract Class
+Implementation	কেবলমাত্র ডিক্লারেশন থাকে।	আংশিক বা সম্পূর্ণ বাস্তবায়ন থাকতে পারে।
+Constructors	নেই।	থাকতে পারে।
+Multiple Inheritance	সম্ভব।	অসম্ভব।
+Access Modifiers	সব মেম্বার public হতে হবে।	বিভিন্ন অ্যাক্সেস মোডিফায়ার ব্যবহার করা যায়।
+ডিফল্ট মেথড ইমপ্লিমেন্টেশন (C# 8.0 এবং পরবর্তীতে)
+C# 8.0 থেকে ইন্টারফেসে ডিফল্ট ইমপ্লিমেন্টেশন দেওয়া সম্ভব।
+
+csharp
+public interface IExample
+{
+    void Method1();
+    void Method2()
+    {
+        Console.WriteLine("Default implementation of Method2.");
+    }
+}
+
+public class ExampleClass : IExample
+{
+    public void Method1()
+    {
+        Console.WriteLine("Implemented Method1.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        IExample example = new ExampleClass();
+        example.Method1(); // Output: Implemented Method1.
+        example.Method2(); // Output: Default implementation of Method2.
+    }
+}
+উপসংহার
+C#-এ interface ব্যবহার করলে কোডের স্থিতিশীলতা ও পুনঃব্যবহারযোগ্যতা বাড়ে। এটি OOP-এর abstraction এবং polymorphism এর গুরুত্বপূর্ণ অংশ।
+
