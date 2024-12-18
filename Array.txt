@@ -107,3 +107,36 @@ Console.WriteLine(jaggedArray[1][2]); // আউটপুট: 5
 সারি-কলামের ডেটা সংরক্ষণ।
 
 লুপের মাধ্যমে দ্রুত প্রসেসিং।
+
+
+
+Array Copy:
+Reference শেয়ার করে।
+একটির মান পরিবর্তন করলে অন্যটিও পরিবর্তিত হয়।
+int[] numbers = { 1, 2, 3, 4, 5 };
+int[] numbersCopy = numbers;
+এখানে numbersCopy নামের আরেকটি অ্যারে তৈরি করা হয়েছে।
+এটি numbers অ্যারেটির reference ধরে রেখেছে। অর্থাৎ, numbers এবং numbersCopy উভয়ই একই মেমোরি স্থান (memory location) শেয়ার করছে।
+numbersCopy[2] = 15;
+numbersCopy[2] তে মান 15 সেট করা হয়েছে।
+যেহেতু numbersCopy এবং numbers একই reference ধরে রাখছে, তাই numbers[2]-এর মানও পরিবর্তন হয়ে 15 হয়ে যায়।
+Console.WriteLine("The Value For numbers variable are: " + numbers[2]);   // 15
+Console.WriteLine("The Value For numbersCopy variable are: " + numbersCopy[2]);   // 15
+
+
+
+Array Clone:
+int[] numbers2 = { 1, 2, 3, 4, 5 };
+int[] numbers2Clone = (int[])numbers2.Clone();
+numbers2.Clone() মেথডটি ব্যবহার করে numbers2 এর একটি shallow copy তৈরি করা হয়েছে।নতুন অ্যারে তৈরি করে।
+অর্থাৎ, numbers2Clone অ্যারেটি numbers2 এর একটি সম্পূর্ণ আলাদা কপি।
+এখন numbers2 এবং numbers2Clone আলাদা মেমোরি অবস্থান (memory location) ধারণ করে।কটির মান পরিবর্তন করলে অন্যটির উপর প্রভাব পড়ে না।
+
+numbers2[2] = 10;
+খানে numbers2Clone[2] এর মান পরিবর্তন করে 15 করা হয়েছে।
+এটি কেবলমাত্র numbers2Clone-এর মান পরিবর্তন করেছে, numbers2-এর নয়।
+Console.WriteLine("The Value For numbers2 variable are: " + numbers2[2]);   // 10
+Console.WriteLine("The Value For numbers2Clone variable are: " + numbers2Clone[2]);   // 15
+
+
+এ
