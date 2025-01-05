@@ -1,0 +1,77 @@
+C# এর ডাটা টাইপ: বিস্তারিত ব্যাখ্যা C# একটি strongly-typed প্রোগ্রামিং ভাষা, যেখানে প্রতিটি ভ্যারিয়েবলের ডাটা টাইপ নির্ধারণ করতে হয়। ডাটা টাইপটি ঠিক করে দেয় ভ্যারিয়েবলটি কী ধরনের মান (data) সংরক্ষণ করতে পারবে। C# এ ডাটা টাইপগুলো মূলত দুই ভাগে বিভক্ত: Value Types Reference Types 1. Value Types Value Types ডাটা সরাসরি মেমোরিতে সংরক্ষণ করে। যখন একটি Value Type অন্য একটি Value Type-এ অ্যাসাইন করা হয়, তখন মূল মানের কপি তৈরি হয়। 1.1 প্রাথমিক (Simple) ডাটা টাইপ ডাটা টাইপ বর্ণনা সাইজ রেঞ্জ (সীমা) উদাহরণ byte 8-বিট unsigned পূর্ণসংখ্যা 1 byte 0 থেকে 255 byte b = 255; sbyte 8-বিট signed পূর্ণসংখ্যা 1 byte -128 থেকে 127 sbyte sb = -128; short 16-বিট signed পূর্ণসংখ্যা 2 bytes -32,768 থেকে 32,767 short s = -32768; ushort 16-বিট unsigned পূর্ণসংখ্যা 2 bytes 0 থেকে 65,535 ushort us = 65535; int 32-বিট signed পূর্ণসংখ্যা 4 bytes -2,147,483,648 থেকে 2,147,483,647 int i = 100; uint 32-বিট unsigned পূর্ণসংখ্যা 4 bytes 0 থেকে 4,294,967,295 uint u = 100u; long 64-বিট signed পূর্ণসংখ্যা 8 bytes -9,223,372,036,854,775,808 থেকে 9,223,372,036,854,775,807 long l = 1000l; ulong 64-বিট unsigned পূর্ণসংখ্যা 8 bytes 0 থেকে 18,446,744,073,709,551,615 ulong ul = 1000ul; float 32-বিট দশমিক সংখ্যা 4 bytes ±1.5 × 10⁻⁴⁵ থেকে ±3.4 × 10³⁸ float f = 1.2f; double 64-বিট দশমিক সংখ্যা 8 bytes ±5.0 × 10⁻³²⁴ থেকে ±1.7 × 10³⁰⁸ double d = 3.14; decimal 128-বিট উচ্চ নির্ভুল দশমিক সংখ্যা 16 bytes ±1.0 × 10⁻²⁸ থেকে ±7.9 × 10²⁸ decimal dec = 2.5m; char 16-বিট ইউনিকোড অক্ষর 2 bytes '\u0000' থেকে '\uffff' char c = 'A'; bool লজিক্যাল মান (true বা false) 1 byte true বা false bool b = true; 1.2 স্ট্রাকচার টাইপ (Struct Types) Struct হলো Value Type-এর এক প্রকার। এটি ব্যবহারকারী দ্বারা সংজ্ঞায়িত। উদাহরণ: csharp Copy code public struct Point { public int X; public int Y; } Point p = new Point { X = 10, Y = 20 }; 1.3 এনাম টাইপ (Enum Types) Enumeration মানে একটি নির্দিষ্ট নামকৃত মানের সেট। উদাহরণ: csharp Copy code public enum Days { Sun, Mon, Tue, Wed, Thu, Fri, Sat }; Days today = Days.Mon; 2. Reference Types Reference Types সরাসরি ডাটা সংরক্ষণ না করে মেমোরি ঠিকানার রেফারেন্স সংরক্ষণ করে। 2.1 প্রি-ডিফাইন্ড রেফারেন্স টাইপ ডাটা টাইপ বর্ণনা উদাহরণ string ইউনিকোড অক্ষরের ক্রম string name = "John"; object সকল টাইপের ভিত্তি object obj = 10; dynamic রUNTIME-এ টাইপ নির্ধারণ হয় dynamic d = "Hello"; 3. ডিফল্ট মান (Default Values) C# এ প্রতিটি ডাটা টাইপের একটি ডিফল্ট মান থাকে। ডাটা টাইপ ডিফল্ট মান int 0 float 0.0f bool false char '\0' string null উদাহরণ: csharp Copy code int i = default; // 0 bool b = default; // false char c = default; // '\0' 4. কনভার্সন (Conversion) C# এ ডাটা টাইপের মধ্যে মান রূপান্তর করা যায় Implicit বা Explicit পদ্ধতিতে। Implicit Conversion ছোট ডাটা টাইপ থেকে বড় ডাটা টাইপে স্বয়ংক্রিয় রূপান্তর হয়: csharp Copy code int i = 345; float f = i; // স্বয়ংক্রিয় রূপান্তর Console.WriteLine(f); // 345.0 Explicit Conversion বড় টাইপ থেকে ছোট টাইপে রূপান্তর করতে হলে স্পষ্ট করে নির্দেশ দিতে হয়: csharp Copy code int i = 100; uint u = (uint)i; // স্পষ্ট রূপান্তর Console.WriteLine(u); , hash star bad diye text ta return koro
+C# এর ডাটা টাইপ: বিস্তারিত ব্যাখ্যা
+C# একটি strongly-typed প্রোগ্রামিং ভাষা, যেখানে প্রতিটি ভ্যারিয়েবলের ডাটা টাইপ নির্ধারণ করতে হয়। ডাটা টাইপটি ঠিক করে দেয় ভ্যারিয়েবলটি কী ধরনের মান (data) সংরক্ষণ করতে পারবে।
+
+C# এ ডাটা টাইপগুলো মূলত দুই ভাগে বিভক্ত:
+
+Value Types Reference Types
+
+1. Value Types
+Value Types ডাটা সরাসরি মেমোরিতে সংরক্ষণ করে। যখন একটি Value Type অন্য একটি Value Type-এ অ্যাসাইন করা হয়, তখন মূল মানের কপি তৈরি হয়।
+
+1.1 প্রাথমিক (Simple) ডাটা টাইপ
+ডাটা টাইপ	বর্ণনা	সাইজ	রেঞ্জ (সীমা)	উদাহরণ
+byte	8-বিট unsigned পূর্ণসংখ্যা	1 byte	0 থেকে 255	byte b = 255;
+sbyte	8-বিট signed পূর্ণসংখ্যা	1 byte	-128 থেকে 127	sbyte sb = -128;
+short	16-বিট signed পূর্ণসংখ্যা	2 bytes	-32,768 থেকে 32,767	short s = -32768;
+ushort	16-বিট unsigned পূর্ণসংখ্যা	2 bytes	0 থেকে 65,535	ushort us = 65535;
+int	32-বিট signed পূর্ণসংখ্যা	4 bytes	-2,147,483,648 থেকে 2,147,483,647	int i = 100;
+uint	32-বিট unsigned পূর্ণসংখ্যা	4 bytes	0 থেকে 4,294,967,295	uint u = 100u;
+long	64-বিট signed পূর্ণসংখ্যা	8 bytes	-9,223,372,036,854,775,808 থেকে 9,223,372,036,854,775,807	long l = 1000l;
+ulong	64-বিট unsigned পূর্ণসংখ্যা	8 bytes	0 থেকে 18,446,744,073,709,551,615	ulong ul = 1000ul;
+float	32-বিট দশমিক সংখ্যা	4 bytes	±1.5 × 10⁻⁴⁵ থেকে ±3.4 × 10³⁸	float f = 1.2f;
+double	64-বিট দশমিক সংখ্যা	8 bytes	±5.0 × 10⁻³²⁴ থেকে ±1.7 × 10³⁰⁸	double d = 3.14;
+decimal	128-বিট উচ্চ নির্ভুল দশমিক সংখ্যা	16 bytes	±1.0 × 10⁻²⁸ থেকে ±7.9 × 10²⁸	decimal dec = 2.5m;
+char	16-বিট ইউনিকোড অক্ষর	2 bytes	'\u0000' থেকে '\uffff'	char c = 'A';
+bool	লজিক্যাল মান (true বা false)	1 byte	true বা false	bool b = true;
+1.2 স্ট্রাকচার টাইপ (Struct Types)
+Struct হলো Value Type-এর এক প্রকার। এটি ব্যবহারকারী দ্বারা সংজ্ঞায়িত।
+
+csharp
+public struct Point {
+    public int X;
+    public int Y;
+}
+Point p = new Point { X = 10, Y = 20 };
+1.3 এনাম টাইপ (Enum Types)
+Enumeration মানে একটি নির্দিষ্ট নামকৃত মানের সেট।
+
+csharp
+public enum Days { Sun, Mon, Tue, Wed, Thu, Fri, Sat };
+Days today = Days.Mon;
+2. Reference Types
+Reference Types সরাসরি ডাটা সংরক্ষণ না করে মেমোরি ঠিকানার রেফারেন্স সংরক্ষণ করে।
+
+2.1 প্রি-ডিফাইন্ড রেফারেন্স টাইপ
+ডাটা টাইপ	বর্ণনা	উদাহরণ
+string	ইউনিকোড অক্ষরের ক্রম	string name = "John";
+object	সকল টাইপের ভিত্তি	object obj = 10;
+dynamic	রানটাইম-এ টাইপ নির্ধারণ হয়	dynamic d = "Hello";
+3. ডিফল্ট মান (Default Values)
+C# এ প্রতিটি ডাটা টাইপের একটি ডিফল্ট মান থাকে।
+
+ডাটা টাইপ	ডিফল্ট মান
+int	0
+float	0.0f
+bool	false
+char	'\0'
+string	null
+csharp
+int i = default; // 0
+bool b = default; // false
+char c = default; // '\0'
+4. কনভার্সন (Conversion)
+C# এ ডাটা টাইপের মধ্যে মান রূপান্তর করা যায় Implicit বা Explicit পদ্ধতিতে।
+
+Implicit Conversion ছোট ডাটা টাইপ থেকে বড় ডাটা টাইপে স্বয়ংক্রিয় রূপান্তর হয়:
+
+csharp
+int i = 345;
+float f = i; // স্বয়ংক্রিয় রূপান্তর
+Console.WriteLine(f); // 345.0
+Explicit Conversion বড় টাইপ থেকে ছোট টাইপে রূপান্তর করতে হলে স্পষ্ট করে নির্দেশ দিতে হয়:
+
+csharp
+int i = 100;
+uint u = (uint)i; // স্পষ্ট রূপান্তর
+Console.WriteLine(u);
