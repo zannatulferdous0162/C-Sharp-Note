@@ -1,0 +1,191 @@
+### **ADO.NET কী এবং এর কাজ কী?**  
+ADO.NET (ActiveX Data Objects for .NET) হল **Microsoft .NET Framework**-এর একটি ডাটা অ্যাক্সেস টেকনোলজি, যা ডাটাবেসের সাথে সংযোগ স্থাপন, ডাটা আদান-প্রদান এবং ম্যানেজ করার জন্য ব্যবহৃত হয়। এটি **SQL Server, MySQL, Oracle** সহ বিভিন্ন ডাটাবেসের সাথে কাজ করতে পারে।  
+
+### **ADO.NET কেন ব্যবহার করা হয়?**  
+- ডাটাবেস থেকে ডাটা রিড, ইনসার্ট, আপডেট এবং ডিলিট করার জন্য।  
+- অ্যাপ্লিকেশন থেকে ডাটাবেসে সংযোগ স্থাপনের জন্য।  
+- **Connected এবং Disconnected মডেল** ব্যবহার করে ডাটা পরিচালনা করা যায়।  
+- স্কেলেবল, ফাস্ট এবং সিকিউরড ডাটা অ্যাক্সেস সিস্টেম।  
+
+---
+
+## **ADO.NET এর মূল কম্পোনেন্টসমূহ:**  
+১. **Connection** – ডাটাবেসের সাথে সংযোগ স্থাপন করা।  
+২. **Command** – SQL কোয়েরি বা Stored Procedure চালানো।  
+3. **DataReader** – Read-only ডাটা রিড করা (Connected mode)।  
+4. **DataSet** – ডিসকানেক্টেড মোডে ডাটা সংরক্ষণ করা।  
+5. **DataAdapter** – DataSet এবং Database-এর মধ্যে ডাটা আদান-প্রদান করা।  
+
+---
+
+## **ADO.NET দিয়ে কাজ করার ধাপসমূহ (Step by Step)**  
+
+### **Step 1: প্রয়োজনীয় নেমস্পেস ইমপোর্ট করুন**  
+প্রথমে আপনার C# প্রজেক্টে ADO.NET এর জন্য **System.Data.SqlClient** নেমস্পেসটি ব্যবহার করুন:  
+
+```csharp
+using System;
+using System.Data;
+using System.Data.SqlClient;
+```
+
+---
+
+### **Step 2: SQL Server-এ সংযোগ (Connection Establishment)**  
+ডাটাবেসের সাথে সংযোগ স্থাপন করতে **SqlConnection** ব্যবহার করুন।  
+
+```csharp
+string connectionString = "Server=your_server_name;Database=your_database_name;User Id=your_username;Password=your_password;";
+SqlConnection conn = new SqlConnection(connectionString);
+```
+
+---
+
+### **Step 3: ডাটাবেজে ডাটা ইনসার্ট করা (Insert Data)**  
+```csharp
+try
+{
+    conn.Open();
+    string query = "INSERT INTO Employees (Name, Age, Position) VALUES ('Rahim', 25, 'Developer')";
+    SqlCommand cmd = new SqlCommand(query, conn);
+    int rowsAffected = cmd.ExecuteNonQuery(); // Executes the command
+    Console.WriteLine(rowsAffected + " row(s) inserted.");
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error: " + ex.Message);
+}
+finally
+{
+    conn.Close(); // Connection বন্ধ করা
+}
+```
+
+---
+
+### **Step 4: ডাটা রিড করা (Read Data using DataReader)**  
+**DataReader** ব্যবহার করে দ্রুত ডাটা পড়তে পারবেন:  
+
+```csharp
+try
+{
+    conn.Open();
+    string query = "SELECT * FROM Employees";
+    SqlCommand cmd = new SqlCommand(query, conn);
+    SqlDataReader reader = cmd.ExecuteReader();
+
+    while (reader.Read())
+    {
+        Console.WriteLine($"ID: {reader["ID"]}, Name: {reader["Name"]}, Age: {reader["Age"]}, Position: {reader["Position"]}");
+    }
+    reader.Close();
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error: " + ex.Message);
+}
+finally
+{
+    conn.Close();
+}
+```
+
+---
+
+### **Step 5: ডাটা আপডেট করা (Update Data)**  
+```csharp
+try
+{
+    conn.Open();
+    string query = "UPDATE Employees SET Age = 26 WHERE Name = 'Rahim'";
+    SqlCommand cmd = new SqlCommand(query, conn);
+    int rowsAffected = cmd.ExecuteNonQuery();
+    Console.WriteLine(rowsAffected + " row(s) updated.");
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error: " + ex.Message);
+}
+finally
+{
+    conn.Close();
+}
+```
+
+---
+
+### **Step 6: ডাটা ডিলিট করা (Delete Data)**  
+```csharp
+try
+{
+    conn.Open();
+    string query = "DELETE FROM Employees WHERE Name = 'Rahim'";
+    SqlCommand cmd = new SqlCommand(query, conn);
+    int rowsAffected = cmd.ExecuteNonQuery();
+    Console.WriteLine(rowsAffected + " row(s) deleted.");
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error: " + ex.Message);
+}
+finally
+{
+    conn.Close();
+}
+```
+
+---
+
+### **Step 7: Disconnected Mode (DataSet & DataAdapter ব্যবহার করে Data Load করা)**  
+**DataSet** এবং **SqlDataAdapter** ব্যবহার করে পুরো টেবিল লোড করুন:  
+
+```csharp
+try
+{
+    conn.Open();
+    string query = "SELECT * FROM Employees";
+    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+    DataSet ds = new DataSet();
+    adapter.Fill(ds, "Employees");
+
+    foreach (DataRow row in ds.Tables["Employees"].Rows)
+    {
+        Console.WriteLine($"ID: {row["ID"]}, Name: {row["Name"]}, Age: {row["Age"]}");
+    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error: " + ex.Message);
+}
+finally
+{
+    conn.Close();
+}
+```
+
+---
+
+## **ADO.NET-এ সংযোগের দুইটি মডেল:**  
+### **1. Connected Model:**  
+- **DataReader** ব্যবহার করে ডাটা রিড করা হয়।  
+- দ্রুত কাজ করে, কিন্তু সার্ভারের সাথে **সংযোগ বজায় রাখতে হয়**।  
+- ব্যবহার করা হয় যখন **দ্রুত ডাটা রিড করা দরকার**।  
+
+### **2. Disconnected Model:**  
+- **DataSet** এবং **DataAdapter** ব্যবহার করা হয়।  
+- ডাটা লোড করার পর **সার্ভারের সাথে সংযোগ কেটে যায়**।  
+- ব্যবহার করা হয় যখন **বড় পরিমাণ ডাটা অফলাইনে প্রসেস করতে হয়**।  
+
+---
+
+## **সংক্ষেপে ADO.NET ও তার কাজ:**  
+| **কম্পোনেন্ট** | **কাজ** |
+|--------------|------------|
+| `SqlConnection` | ডাটাবেজের সাথে সংযোগ তৈরি করা |
+| `SqlCommand` | SQL কোয়েরি চালানো |
+| `SqlDataReader` | শুধু পড়ার জন্য ডাটা রিড করা (Connected mode) |
+| `DataSet` | ডিসকানেক্টেড মোডে ডাটা স্টোর করা |
+| `SqlDataAdapter` | DataSet এবং ডাটাবেজের মধ্যে ডাটা আদান-প্রদান করা |
+
+---
+
